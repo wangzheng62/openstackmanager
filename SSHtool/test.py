@@ -1,15 +1,26 @@
-from paramiko.client import SSHClient
-from paramiko import AutoAddPolicy,Transport
+import os,sys
+from paramiko import AutoAddPolicy,Transport,Channel,client,SSHClient
 from time import sleep
+sys.path.append(os.path.abspath('..'))
+print(sys.path)
+from SSHtool.interactive import windows_shell
+#transport
+tran=Transport(('192.168.220.129',22))
+tran.connect(username='wz',password='12345678')
+#client
 UBUNTU01={'hostname':'192.168.0.123'}
-clent01=SSHClient()
-clent01.set_missing_host_key_policy(AutoAddPolicy())
-clent01.connect(hostname='192.168.0.123',port=22,username='wz',password='12345678')
-chan=clent01.invoke_shell()
-chan.send('pwd'+'\n')
-sleep(3)
-s=chan.recv(10000)
-print(s)
-chanid=chan.get_id()
-print(chanid)
-clent01.close()
+client01=SSHClient()
+client01.set_missing_host_key_policy(AutoAddPolicy())
+client01.connect(hostname='192.168.220.129',port=22,username='wz',password='12345678')
+chan=client01.invoke_shell()
+windows_shell(chan)
+print(chan.__str__())
+#chan.setblocking(1)
+#chan.settimeout(2.0)
+#chan.send('sudo apt -y -f remove sslscan'+'\n'+'12345678'+'\n')
+#chan.send('pwd'+'\n')
+#chan.send('ping 127.0.0.1 \n')
+#sleep(10)
+#inf=chan.recv(20000)
+#print(inf.decode())
+client01.close()
