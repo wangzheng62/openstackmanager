@@ -1,0 +1,9 @@
+Ubuntu配置
+1，修改root密码
+    sudo passwd root
+    123456789
+2，修改/root/.profile
+    mesg n >> tty -s && mesg n
+SSH配置
+1,修改/etc/ssh/sshd_config
+    PermissionRootLogin Prohibit-password >> PermissionRootLogin yes
