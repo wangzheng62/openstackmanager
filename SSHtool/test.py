@@ -1,21 +1,23 @@
 import os,sys
 from paramiko import AutoAddPolicy,Transport,Channel,client,SSHClient
 from time import sleep
-import socket
-socket01=socket.socket()
-socket01.connect(('192.168.220.129',22))
-tran=Transport(socket01)
-tran.connect(username='root',password='123456789')
-print(tran.is_active())
-chan=tran.open_channel(kind='session')
-chan.invoke_shell()
-com='sudo apt -y -f install sslscan \n' \
-        '12345678\n'
-com1='pwd\n'
-com2='apt-get -y -f install sslscan\n'
-chan.send(com2)
-sleep(5)
-if chan.recv_stderr_ready():
-    print(chan.recv_stderr(10000).decode())
-else:
-    print(chan.recv(10000).decode())
+#set root password. input user's password,new password,retype password
+setpassword=['sudo passwd root','12345678','12345678','12345678']
+#modify /root/.profile
+modifyrootprofile=['sudo sed \'s/mesg n/tty -s && mesg n/g\'','12345678']
+#modify ssh_config
+modifysshconfig=['sudo sed \'s/PermitRootLogin prohibit-password/PermitRootLogin yes/g\' /etc/ssh/sshd_config','12345678','sudo service ssh restart']
+#
+sshclt=SSHClient()
+sshclt.set_missing_host_key_policy(AutoAddPolicy())
+sshclt.connect(hostname='192.168.220.129',port=22,username='wz',password='12345678')
+chan=sshclt.invoke_shell()
+for com in setpassword:
+    chan.send(com+'\n')
+    sleep(3)
+while(True):
+    tmp=chan.recv(1000)
+    print(tmp.decode())
+
+if __name__=='__main__':
+    pass
