@@ -1,0 +1,12 @@
+数据列表
+server
+    IP
+    port
+    username
+    password
+command
+commandstatus
+
+功能列表
+execute(server,command)
+    return commandstatus
