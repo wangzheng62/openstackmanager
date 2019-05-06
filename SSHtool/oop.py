@@ -5,7 +5,7 @@ class Servernode():
     def __init__(self):
         pass
     def excutecommand(self):
-        pass
+        return True
     def excutelog(self):
         pass
     def applist(self):
@@ -15,9 +15,9 @@ class Servernode():
 
 class Bash(Servernode):
     def sed(self):
-        pass
+        return True
     def apt(self):
-        pass
+        return True
 #控制中心,接受服务器列表和待执行命令，将命令发送到每个服务器，并监控执行结果
 class Controlcenter():
     def __init__(self):
