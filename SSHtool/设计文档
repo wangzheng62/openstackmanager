@@ -10,3 +10,16 @@ commandstatus
 功能列表
 execute(server,command)
     return commandstatus
+软件的数据流
+数据的IPO流程
+input：
+command
+server
+    IP
+    port
+    username
+    password
+process：
+execute command on server node
+out：
+commandstatus

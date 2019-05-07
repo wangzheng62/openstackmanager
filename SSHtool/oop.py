@@ -14,7 +14,6 @@ class BASH(ShellBase):
         return res
 #目标服务器
 class Servernode(dict):
-    defaultsh=BASH()
     def __init__(self,**kwargs):
         super(Servernode,self).__init__(**kwargs)
 
