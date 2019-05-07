@@ -23,3 +23,8 @@ process：
 execute command on server node
 out：
 commandstatus
+
+函数和类的感想
+函数是动态的，函数一旦执行，会一直进行到底。函数的数据是临时的，仅限于内部使用的
+类是静态的，类可以分阶段，把一个函数分解为多个method，用类来控制method进而控制函数的进度。
+类的数据可以是长久的，可以是公共的。
