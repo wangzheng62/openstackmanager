@@ -11,14 +11,17 @@ modifysshconfig1604=['sudo sed -i \'s/PermitRootLogin prohibit-password/PermitRo
 modifysshconfig1804=['sudo chmod u+w /etc/ssh/sshd_config','12345678',r"sudo sed -i 's/\#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config",'12345678','sudo service ssh restart']
 sshclt=SSHClient()
 sshclt.set_missing_host_key_policy(AutoAddPolicy())
-sshclt.connect(hostname='192.168.0.123',port=22,username='wz',password='12345678')
-chan=sshclt.invoke_shell()
+sshclt.connect(hostname='192.168.220.129',port=22,username='wz',password='12345678')
+stdin,stdout,stderr=sshclt.exec_command('echo 12345678|sudo -S apt-get -y install ssls')
+
+print(stdout.read().decode(),stderr.read())
+'''chan=sshclt.invoke_shell()
 for com in modifysshconfig1804:
     chan.send(com)
     chan.send('\n')
     sleep(3)
 tmp=chan.recv(1000)
 print(tmp.decode())
-
+'''
 if __name__=='__main__':
     pass
